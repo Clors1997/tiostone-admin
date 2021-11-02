@@ -1,0 +1,29 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" >
+<!--
+2013-9-30: Created.
+-->
+<svg>
+<metadata>
+Created by iconfont
+</metadata>
+<defs>
+
+<font id="anticon-ws" horiz-adv-x="1024" >
+  <font-face
+    font-family="anticon-ws"
+    font-weight="500"
+    font-stretch="normal"
+    units-per-em="1024"
+    ascent="896"
+    descent="-128"
+  />
+    <missing-glyph />
+    
+    <glyph glyph-name="calendar" unicode="&#58881;" d="M234.667 682.667h57.706v-63.979l-57.706-0.021V512h554.666V618.667h-55.232v64h55.232a64 64 0 0 0 64-64v-512a64 64 0 0 0-64-64H234.667a64 64 0 0 0-64 64v512a64 64 0 0 0 64 64zM789.333 448H234.667v-341.333h554.666V448z m-384-192v-64H298.667v64h106.666z m160 0v-64H458.667v64h106.666z m160 0v-64H618.667v64h106.666z m-320 128v-64H298.667v64h106.666z m160 0v-64H458.667v64h106.666z m160 0v-64H618.667v64h106.666z m-27.605 341.333v-106.666h-64.021V725.333h64z m-104.17-42.666v-64l-160.62 0.021v63.979h160.62z m-197.014 42.666v-106.666h-64V725.333h64z"  horiz-adv-x="1024" />
+
+    
+
+
+  </font>
+</defs></svg>
