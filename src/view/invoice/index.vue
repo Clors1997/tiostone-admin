@@ -263,7 +263,6 @@ export default {
   components: { deposit, selectDelivery, newFactory, edit, newDiscount, editDiscount, pdf, record, tool },
   created() {
     this.func_width(this.screenwidth);
-
     this.subColumns = [
       { title: "Number", width: 100, dataIndex: "show_id" },
       { title: "Size", width: 150, dataIndex: "size" },
@@ -299,7 +298,7 @@ export default {
       this.scroll = val<1500?{ x: 1307 }:{};
         this.columns = [
           { width: 50, scopedSlots: { customRender: "plus" } },
-          { title: "Number", width: 100, dataIndex: "show_id" },
+          { title: "Number", width: 100, dataIndex: "invoice_number" },
           { title: "PO Number", width: 150, dataIndex: "invoice_no",
             sorter: (a, b) => {
               return (b.invoice_no.length - a.invoice_no.length) == 0?(b.invoice_no>a.invoice_no):(b.invoice_no.length - a.invoice_no.length)
@@ -384,7 +383,6 @@ export default {
         r_invoice(pagenum, size, this.search, this.search2)
           .then(res => {
             console.log(res);
-
             this.onTableLoading = false;
             this.tableData = res.list;
             this.dataSource = res.list;

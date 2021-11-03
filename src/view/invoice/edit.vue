@@ -11,6 +11,10 @@
       <a-row>
         <a-col>
           <p class="item">
+            <span class="label required">Number</span>
+            <a-input :maxLength="400" v-model="info.invoice_number"></a-input>
+          </p>
+          <p class="item">
             <span class="label required">Client</span>
             <a-input @click="()=>{
               $refs.selectClientele.showModal('')
@@ -64,6 +68,7 @@ import moment from "moment";
 import { isHasVal } from "@/utils/validate";
 import { u_invoice } from "@/api/invoice.js";
 import selectClientele from "@/components/selectClientele.vue";
+import { u_invoice_test } from "@/api/number.js";
 
 export default {
   data() {
@@ -75,6 +80,7 @@ export default {
       info: {
         clientele_id: "",
         name_en: "",
+        invoice_number:"",
         invoice_no: "",
         invoice_date: "",
         invoice_site: "",
@@ -92,7 +98,6 @@ export default {
     show(info, status_array) {
       this.info = JSON.parse(JSON.stringify(info));
       this.status_array = status_array;
-
       if (this.info.invoice_date == "0000-00-00") {
         this.info.invoice_date = null;
       } else {
@@ -150,7 +155,7 @@ export default {
     onSubmit() {
       Object.assign(this.submit_info, this.info);
       this.onSubmiting = true;
-      u_invoice(this.handle_submit_data(this.submit_info))
+      u_invoice_test(this.handle_submit_data(this.submit_info))
         .then(res => {
           console.log(res);
           if (res.status) {

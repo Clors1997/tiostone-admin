@@ -10,26 +10,20 @@
       <a-divider orientation="left">
         P.O. info
       </a-divider>
-          <!-- <p class="item item-full">
-            <span class="label required">Select From Client</span>
-            <a-button
-              type="primary"
-              icon="search"
-              @click="()=>{
-              $refs.selectClientele.showModal('')
-              }"
-            >Select</a-button>
-          </p> -->
+          <p class="item item-helf">
+            <span class="label required">Number</span>
+            <a-input :maxLength="400" v-model="info.invoice_number"></a-input>
+          </p>
           <p class="item item-helf">
             <span class="label required">Client</span>
             <a-input readOnly @click="()=>{
               $refs.selectClientele.showModal('')
               }" :maxLength="255" v-model="info.name_en"></a-input>
           </p>
-          </p>
+          <!-- </p> -->
           <p class="item item-helf">
             <span class="label required">Order Date</span>
-            <a-date-picker format="DD/MM/YYYY" v-model="info.invoice_date" placeholder="seletc time"></a-date-picker>
+            <a-date-picker format="DD/MM/YYYY" v-model="info.invoice_date" placeholder="select time"></a-date-picker>
           </p>
           <p class="item item-helf">
             <span class="label required">PO Number</span>
@@ -178,6 +172,8 @@ import selectClientele from "@/components/selectClientele.vue";
 import newSize from "@/components/newSize";
 import newTypeCode from "@/components/newTypeCode";
 import selectSize from "@/components/selectSize";
+import {r_invoice_test } from "@/api/number.js";
+import {c_invoice_test } from "@/api/number.js";
 export default {
   data() {
     return {
@@ -189,6 +185,7 @@ export default {
 
       },
       info: {
+        invoice_number:"",
         clientele_id: "",
         name_en: "",
         invoice_no: "",
@@ -225,7 +222,9 @@ export default {
     };
   },
   components: { selectClientele, newSize, newTypeCode, selectSize },
-  created() {},
+  created(){
+
+  },
   methods: {
     show(status_array) {
       for (const key in this.info) {
@@ -233,19 +232,28 @@ export default {
           this.info[key] = "";
         }
       }
+      r_invoice_test().then(res=>{
+      this.info.invoice_number=res.maxnum;
+      this.visible = true;
+      this.onSubmiting = false;
+      console.log(res);
+      })
+      .catch(err => {
+        console.log(err.message)
+        this.onTableLoading = false;  
+        this.$message.error("fail - system error");
+        });
       this.info.invoice_date = null;
       this.status_array = status_array;
       this.info.invoice_status = this.status_array[0];
       this.get_product_meta();
-
-      this.visible = true;
-      this.onSubmiting = false;
       console.log(this.info);
     },
     onClose() {
       this.itemInfoArr = [];
       this.submit_num = 0;
       this.info = {
+        invoice_number:"",
         clientele_id: "",
         name_en: "",
         invoice_no: "",
@@ -383,6 +391,7 @@ export default {
         this.itemInfoArr = [];
         this.submit_num = 0;
         this.info = {
+          invoice_number:"",
           clientele_id: "",
           name_en: "",
           invoice_no: "",
@@ -403,7 +412,8 @@ export default {
     onSubmit() {
       Object.assign(this.submit_info, this.info);
       this.onSubmiting = true;
-      c_invoice(this.handle_submit_data(this.submit_info))
+      console.log(this.submit_info);
+      c_invoice_test(this.handle_submit_data(this.submit_info))
         .then(res => {
           console.log(res);
           if (res.status) {
